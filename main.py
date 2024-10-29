@@ -11,16 +11,19 @@ col1, col2, col3, col4 = st.columns([0.15, 0.15, 0.15, 0.55])
 # START AND END DATES FOR PAY PERIOD:
 
 st.text("Select the start date of the pay period")
-s_year = col1.number_input(label="Year", key="s_year")
-s_month = col2.number_input(label="Month",key="s_month")
-s_day = col3.number_input(label="Day",key="s_day")
+col11, col12, col13, col14 = st.columns([0.15, 0.15, 0.15, 0.55])
+s_year = col11.number_input(label="Year", key="s_year")
+s_month = col12.number_input(label="Month",key="s_month")
+s_day = col13.number_input(label="Day",key="s_day")
 
 start_date_string = " ".join([str(s_year), str(s_month), str(s_day)])
 
 st.text("Select the end date of the pay period")
-e_year = col1.number_input(label="Year", key="e_year")
-e_month = col2.number_input(label="Month", key="e_month")
-s_day = col3.number_input(label="Day", key="e_day")
+col21, col22, col23, col24 = st.columns([0.15, 0.15, 0.15, 0.55])
+
+e_year = col21.number_input(label="Year", key="e_year")
+e_month = col22.number_input(label="Month", key="e_month")
+s_day = col23.number_input(label="Day", key="e_day")
 
 end_date_string = " ".join([str(e_year), str(e_month), str(e_day)])
 

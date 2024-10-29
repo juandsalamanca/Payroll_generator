@@ -23,7 +23,7 @@ col21, col22, col23, col24 = st.columns([0.15, 0.15, 0.15, 0.55])
 
 e_year = col21.number_input(label="Year", key="e_year")
 e_month = col22.number_input(label="Month", key="e_month")
-s_day = col23.number_input(label="Day", key="e_day")
+e_day = col23.number_input(label="Day", key="e_day")
 
 end_date_string = " ".join([str(e_year), str(e_month), str(e_day)])
 

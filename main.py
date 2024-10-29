@@ -37,8 +37,6 @@ pay_period = [start_date_string, end_date_string]
 
 payroll_register = st.file_uploader("Upload the payroll register file")
 
-df = pd.read_excel(payroll_register)
-
 timelock = st.file_uploader("Upload the timelock file")
 
 @st.cache_data

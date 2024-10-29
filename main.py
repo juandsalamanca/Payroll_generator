@@ -5,7 +5,7 @@ from src.produce_payroll_output import *
 from src.format_date import *
 from src.preprocess_files import *
 
-st.header("Payroll automation")
+st.title("Payroll automation")
 col1, col2, col3, col4 = st.columns([0.15, 0.15, 0.15, 0.55])
 
 #--------------------------------------------------------------------------------

@@ -12,18 +12,18 @@ col1, col2, col3, col4 = st.columns([0.15, 0.15, 0.15, 0.55])
 
 st.text("Select the start date of the pay period")
 col11, col12, col13, col14 = st.columns([0.15, 0.15, 0.15, 0.55])
-s_year = col11.number_input(label="Year", key="s_year")
+s_year = col11.number_input(label="Year", key="s_year",step = 1)
 s_month = col12.number_input(label="Month",key="s_month", step = 1)
-s_day = col13.number_input(label="Day",key="s_day")
+s_day = col13.number_input(label="Day",key="s_day",step = 1)
 
 start_date_string = " ".join([str(s_year), str(s_month), str(s_day)])
 
 st.text("Select the end date of the pay period")
 col21, col22, col23, col24 = st.columns([0.15, 0.15, 0.15, 0.55])
 
-e_year = col21.number_input(label="Year", key="e_year")
-e_month = col22.number_input(label="Month", key="e_month")
-e_day = col23.number_input(label="Day", key="e_day")
+e_year = col21.number_input(label="Year", key="e_year", step = 1)
+e_month = col22.number_input(label="Month", key="e_month", step = 1)
+e_day = col23.number_input(label="Day", key="e_day", step = 1)
 
 end_date_string = " ".join([str(e_year), str(e_month), str(e_day)])
 

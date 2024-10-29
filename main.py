@@ -20,7 +20,7 @@ start_date_string = " ".join([str(s_year), str(s_month), str(s_day)])
 st.text("Select the end date of the pay period")
 e_year = col1.number_input(label="Year", key="e_year")
 e_month = col2.number_input(label="Month", key="e_month")
-s_day = col3.number_input(label="Day", key="s_day")
+s_day = col3.number_input(label="Day", key="e_day")
 
 end_date_string = " ".join([str(e_year), str(e_month), str(e_day)])
 

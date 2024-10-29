@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 from src.produce_payroll_output import *
-from format_date import *
+from src.format_date import *
+from src.preprocess_files import *
 
 st.header("Payroll automation")
 col1, col2, col3, col4 = st.columns([0.15, 0.15, 0.15, 0.55])
@@ -32,29 +33,29 @@ payroll_register = st.file_uploader("Upload the payroll register file")
 
 timelock = st.file_uploader("Upload the timelock file")
 
-  #-----------------------------------------------------------------------------------------
-if payroll_register and timelock:
+@st.cache_data
+def process_data(payroll, timelock, pay_period):
+  payroll, timelock, empl_trio = preprocess_files(payroll=payroll_register, timelock=timelock)
   # Produce the output files:
   VTC, VTE = produce_payroll_output(payroll=payroll, time_file_path=timelock, empl_trio=empl_trio, pay_period=pay_period)
-  
-  @st.cache_data
-  def convert_df(df):
-      # IMPORTANT: Cache the conversion to prevent computation on every rerun
-      return df.to_excel().encode("utf-8")
-  
-  VTC_csv = convert_df(VTC)
-  VTE_csv = convert_df(VTE, "VTE_output")
-  
+  VTC_excel = VTC.to_excel().encode("utf-8")
+  VTE_excel = VTE.to_excel().encode("utf-8")
+  return VTC_excel, VTE_excel
+#-----------------------------------------------------------------------------------------
+if payroll_register and timelock:
+
+  VTC_excel, VTE_excel = process_data(payroll=payroll_register, timelock=timelock, pay_period=pay_period)
+
   st.download_button(
       label="Download the VTC_output",
-      data=VTC_csv,
+      data=VTC_excel,
       file_name="VTC_output.csv",
       mime="text/csv",
   )
   
   st.download_button(
       label="Download the VTE_output",
-      data=VTE_csv,
+      data=VTE_excel,
       file_name="VTE_output.csv",
       mime="text/csv",
   )

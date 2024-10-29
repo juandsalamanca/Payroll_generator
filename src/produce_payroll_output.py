@@ -1,5 +1,9 @@
 import pandas as pd
 import numyp as np
+from datetime import datetime
+from src.calculate_total_pay_for_employee import *
+from src.time_string_to_float import *
+from src.update_payroll_output import *
 
 def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
 

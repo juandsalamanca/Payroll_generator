@@ -3,6 +3,12 @@ import numyp as np
 
 def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
 
+  pay_column = ["REG Hrs", "SBANK Amount"]
+  pay_col_indexes = [payroll.columns.get_loc(col) for col in pay_column]
+  tax_column = ["FITW Amount", "COPFL-EE Amount"]
+  tax_col_indexes = [payroll.columns.get_loc(col) for col in tax_column]
+  benefit_column = ["MDCL Amount", "KMED Amount"]
+  benefit_col_indexes = [payroll.columns.get_loc(col) for col in benefit_column]
   employees = payroll["Employee"]
   VTC = {"Date":[], "Account":[], "Debits":[], "Credits":[], "Description":[], "Name":[], "Employee":[]}
   VTE = {"Date":[], "Account":[], "Debits":[], "Credits":[], "Description":[], "Name":[], "Employee":[]}

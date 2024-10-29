@@ -27,7 +27,7 @@ end_date_string = " ".join([str(e_year), str(e_month), str(e_day)])
 pay_period = [start_date_string, end_date_string]
 #-----------------------------------------------------------------------------------------
 
-UPLOAD FILES AND PRE-PROCESS THEM
+#UPLOAD FILES AND PRE-PROCESS THEM
 
 payroll_register = st.file_uploader("Upload the payroll register file")
 

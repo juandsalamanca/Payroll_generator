@@ -1,5 +1,5 @@
 import pandas as pd
-import numyp as np
+import numpy as np
 from datetime import datetime
 from src.calculate_total_pay_for_employee import *
 from src.time_string_to_float import *

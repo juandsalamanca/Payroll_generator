@@ -22,7 +22,7 @@ def preprocess_files(payroll, timelock):
         if word in sheet:
           cnt += 1
       if cnt > 1:
-        name_pairs[employee] = sheet.strip()
+        name_pairs[employee] = sheet
   
   empl_categories = {"Rowlee, Adam G.":"VTC", "Stinson, Spencer A.":"VTC", "Russell, Bryan T.":"VTC", "Fant, Ashley L.":"VTC", "Heim, Christian": "VTC", "Connor, Connor J.":"VTE", "Smith, Der":"VTC", "Fife, Devon N.":"VTC", "Moore, Elijah J.":"VTC", "Harvey, Elliott J.":"VTE", "Hegreness, Eric D.":"VTC", "Rice, Eric":"VTC", "Edwards, RJ L.":"VTC"}
   empl_trio = {}

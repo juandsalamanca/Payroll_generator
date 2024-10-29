@@ -3,7 +3,7 @@ import pandas as pd
 def preprocess_files(payroll, timelock):  
 
   #Read payroll file and asjust columns
-  payroll = pd.read_excel(payroll_register)
+  payroll = pd.read_excel(payroll)
   cols = column_names = ["Conan", "nan", "Location", "nan", "Employee", "nan", "ID", "nan", "Process", "nan", "Chk Date", "nan", "Chk/Vchr", "nan", "Net", "nan", "REG Hrs", "REG Amount", "OT Hrs", "OT Amount", "PTOSK Hrs", "PTOSK Amount", "SICK Hrs", "SICK Amount", "ESICK Hrs", "ESICK Amount", "HSTIP Hrs", "HSTIP Amount", "SBANK Hrs", "SBANK Amount", "nan", "FITW Amount", "nan", "MED Amount", "nan", "SS Amount", "nan", "CO Amount", "nan", "COPFL-EE Amount", "nan", "MDCL Amount","nan", "REIMB Amount", "nan", "4ROTH Amount","nan", "DNTL Amount", "nan", "KMED Amount"]
   payroll.columns = cols
   payroll = payroll.drop([0,1,2]).reset_index(drop=True)

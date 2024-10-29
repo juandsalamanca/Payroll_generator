@@ -44,8 +44,8 @@ def process_data(payroll, timelock, pay_period):
   payroll, timelock, empl_trio = preprocess_files(payroll=payroll_register, timelock=timelock)
   # Produce the output files:
   VTC, VTE = produce_payroll_output(payroll=payroll, time_file_path=timelock, empl_trio=empl_trio, pay_period=pay_period)
-  VTC_excel = VTC.to_excel().encode("utf-8")
-  VTE_excel = VTE.to_excel().encode("utf-8")
+  VTC_excel = VTC.to_excel('VTC.xlsx').encode("utf-8")
+  VTE_excel = VTE.to_excel('VTE.xlsx').encode("utf-8")
   return VTC_excel, VTE_excel
 #-----------------------------------------------------------------------------------------
 if payroll_register and timelock:

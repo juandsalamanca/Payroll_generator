@@ -13,7 +13,7 @@ col1, col2, col3, col4 = st.columns([0.15, 0.15, 0.15, 0.55])
 st.text("Select the start date of the pay period")
 col11, col12, col13, col14 = st.columns([0.15, 0.15, 0.15, 0.55])
 s_year = col11.number_input(label="Year", key="s_year")
-s_month = col12.number_input(label="Month",key="s_month")
+s_month = col12.number_input(label="Month",key="s_month", step = 1)
 s_day = col13.number_input(label="Day",key="s_day")
 
 start_date_string = " ".join([str(s_year), str(s_month), str(s_day)])

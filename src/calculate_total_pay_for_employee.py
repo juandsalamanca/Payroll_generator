@@ -1,4 +1,4 @@
-import pandas as pod
+import pandas as pd
 
 def calculate_total_pay_for_employee(payroll, idx, cols):
   pay = 0

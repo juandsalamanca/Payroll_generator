@@ -59,19 +59,21 @@ if payroll_register and timelock:
     st.session_state.processed = True
     
     VTC_excel, VTE_excel = process_data(payroll=payroll_register, timelock=timelock, pay_period=pay_period)
+    st.session_state.VTC = VTC_excel
+    st.session_state.VTE = VTE_excel
 
   if st.session_state.processed == True:
   
     st.download_button(
         label="Download the VTC_output",
-        data=VTC_excel,
+        data=st.session_state.VTC,
         file_name=f"VTC_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
         mime="text/csv",
     )
     
     st.download_button(
         label="Download the VTE_output",
-        data=VTE_excel,
+        data=st.session_state.VTE,
         file_name="VTE_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
         mime="text/csv",
     )

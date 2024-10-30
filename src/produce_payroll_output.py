@@ -68,9 +68,9 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
       job_pay[key] = subpay
     #Update the correct dict with all the relevant info
     if cat == "VTC":
-      VTC = update_payroll_output(employee=employee, net_pay=net_pay, job_pay=job_pay, taxes=taxes, benefits=total_benefit, VT=VTC, pay_period=pay_period)
+      VTC = update_payroll_output(employee=employee, net_pay=net_pay, job_pay=job_pay, taxes=taxes, benefits=total_benefit, VT=VTC, pay_period=pay_period, total_pay=total_pay)
     elif cat == "VTE":
-      VTE = update_payroll_output(employee=employee, net_pay=net_pay, job_pay=job_pay, taxes=taxes, benefits=total_benefit, VT=VTE, pay_period=pay_period)
+      VTE = update_payroll_output(employee=employee, net_pay=net_pay, job_pay=job_pay, taxes=taxes, benefits=total_benefit, VT=VTE, pay_period=pay_period, total_pay=total_pay)
     i+=1
 
   return pd.DataFrame(VTC), pd.DataFrame(VTE)

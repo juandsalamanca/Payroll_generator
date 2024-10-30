@@ -4,7 +4,7 @@ def update_payroll_output(employee, net_pay, job_pay, taxes, benefits, VT, pay_p
   for job in job_pay:
     VT["Date"].append(pay_period[1])
     VT["Account"].append("5000 Direct - Labor")
-    VT["Debits"].append(job_pay[job])
+    VT["Debits"].append(round(job_pay[job], 2))
     VT["Credits"].append("-")
     VT["Description"].append(f"Payroll {pay_period[0]} to {pay_period[1]}")
     VT["Name"].append(job)

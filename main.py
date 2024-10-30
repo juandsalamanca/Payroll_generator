@@ -39,7 +39,7 @@ payroll_register = st.file_uploader("Upload the payroll register file")
 
 timelock = st.file_uploader("Upload the timelock file")
 
-@st.cache_data
+
 def process_data(payroll, timelock, pay_period):
   payroll, timelock, empl_trio = preprocess_files(payroll=payroll_register, timelock=timelock)
   # Produce the output files:
@@ -50,18 +50,22 @@ def process_data(payroll, timelock, pay_period):
 #-----------------------------------------------------------------------------------------
 if payroll_register and timelock:
 
-  VTC_excel, VTE_excel = process_data(payroll=payroll_register, timelock=timelock, pay_period=pay_period)
-
-  st.download_button(
-      label="Download the VTC_output",
-      data=VTC_excel,
-      file_name=f"VTC_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
-      mime="text/csv",
-  )
+  run = st.button("Process files")
   
-  st.download_button(
-      label="Download the VTE_output",
-      data=VTE_excel,
-      file_name="VTE_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
-      mime="text/csv",
-  )
+  if run:
+    
+    VTC_excel, VTE_excel = process_data(payroll=payroll_register, timelock=timelock, pay_period=pay_period)
+  
+    st.download_button(
+        label="Download the VTC_output",
+        data=VTC_excel,
+        file_name=f"VTC_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
+        mime="text/csv",
+    )
+    
+    st.download_button(
+        label="Download the VTE_output",
+        data=VTE_excel,
+        file_name="VTE_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
+        mime="text/csv",
+    )

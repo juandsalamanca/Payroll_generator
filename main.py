@@ -55,13 +55,13 @@ if payroll_register and timelock:
   st.download_button(
       label="Download the VTC_output",
       data=VTC_excel,
-      file_name="VTC_output.csv",
+      file_name=f"VTC_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
       mime="text/csv",
   )
   
   st.download_button(
       label="Download the VTE_output",
       data=VTE_excel,
-      file_name="VTE_output.csv",
+      file_name="VTE_output_{current_year}_{current_month}_{str(s_day)}_to_{str(e_day)}.csv",
       mime="text/csv",
   )

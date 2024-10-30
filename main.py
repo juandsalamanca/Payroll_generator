@@ -52,15 +52,15 @@ if payroll_register and timelock:
 
   run = st.button("Process files")
 
-  if "processed" not in st.session_sate:
-    st.session_sate.processed = False
+  if "processed" not in st.session_state:
+    st.session_state.processed = False
     
   if run:
-    st.session_sate.processed = True
+    st.session_state.processed = True
     
     VTC_excel, VTE_excel = process_data(payroll=payroll_register, timelock=timelock, pay_period=pay_period)
 
-  if st.session_sate.processed == True:
+  if st.session_state.processed == True:
   
     st.download_button(
         label="Download the VTC_output",

@@ -2,7 +2,7 @@ import streamlit as st
 def update_payroll_output(employee, net_pay, job_pay, taxes, benefits, VT, pay_period, total_pay):
 
   #Job pay
-  st.write("Change")
+  st.write("Change 2")
   rounded_total = 0
   for job in job_pay:
     VT["Date"].append(pay_period[1])
@@ -15,7 +15,7 @@ def update_payroll_output(employee, net_pay, job_pay, taxes, benefits, VT, pay_p
     rounded_total += round(job_pay[job], 2)
   delta = total_pay - rounded_total
   if delta != 0:
-    VT["Debits"][-1] = round(VT["Debits"][-1] + delta, 2)
+    VT["Debits"][-1] = str(round(VT["Debits"][-1] + delta, 2))
 
   #Payroll taxes
   VT["Date"].append(pay_period[1])

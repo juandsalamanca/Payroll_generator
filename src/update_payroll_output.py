@@ -5,7 +5,7 @@ def update_payroll_output(employee, net_pay, job_pay, taxes, benefits, VT, pay_p
   for job in job_pay:
     VT["Date"].append(pay_period[1])
     VT["Account"].append("5000 Direct - Labor")
-    VT["Debits"].append(str(round(job_pay[job], 2)))
+    VT["Debits"].append(round(job_pay[job], 2))
     VT["Credits"].append("-")
     VT["Description"].append(f"Payroll {pay_period[0]} to {pay_period[1]}")
     VT["Name"].append(job)
@@ -13,7 +13,7 @@ def update_payroll_output(employee, net_pay, job_pay, taxes, benefits, VT, pay_p
     rounded_total += round(job_pay[job], 2)
   delta = total_pay - rounded_total
   if delta != 0:
-    VT["Debits"][-1] = str(float(VT["Debits"][-1]) + delta)
+    VT["Debits"][-1] = round(VT["Debits"][-1] + delta), 2)
 
   #Payroll taxes
   VT["Date"].append(pay_period[1])

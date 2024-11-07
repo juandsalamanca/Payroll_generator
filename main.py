@@ -35,7 +35,7 @@ pay_period = [start_date_string, end_date_string]
 
 new_payroll = None
 old = None
-option = st.selectbox("Do you want to add or delete an employee from the regular list?", ("Add", "Delete", "Both"))
+option = st.selectbox("Do you want to add or delete an employee from the regular list?", ("No changes", "Add", "Delete", "Both"))
 if option == "Add":
   new_payroll = st.text_input("Write down the name of the new employee exactly as it will appear in the payroll file")
   new_timelock = st.text_input("Write down the name of the new employee exactly as it will appear in the timelock file (name of the sheet for that employee)")

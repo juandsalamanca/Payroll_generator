@@ -20,19 +20,8 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
   i=0
   while i < len(employees):
     employee = employees[i]
-    sheet = empl_trio[employee][0]
-    cat = empl_trio[employee][1]
-    time_df = pd.read_excel(time_file_path, sheet_name = sheet)
-    cols = time_df.loc[0]
-    time_df.columns = cols
-    time_df = time_df.drop([0]).reset_index(drop=True)
-    work_time_col =  time_df["Total Work Time"]
-    total_work_time = 0
-    job_hours = {}
-    j=0
     #Calculate toal pay and get net pay:
     net_pay = payroll.loc[i, "Net"]
-    #print("Earnings:")
     total_pay = calculate_total_pay_for_employee(payroll=payroll, idx=i, cols=pay_col_indexes)
     #Calculate money paid for taxes:
     total_tax = calculate_total_pay_for_employee(payroll=payroll, idx=i, cols=tax_col_indexes)
@@ -41,32 +30,46 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
     taxes = [total_tax, MED, SS]
     #Calculate money paid for benefits:
     total_benefit = calculate_total_pay_for_employee(payroll=payroll, idx=i, cols=benefit_col_indexes)
-    #Calculate work hours for each employee:
-    while j < len(work_time_col):
-      work_time = work_time_col[j]
-      job = time_df.loc[j, "Job"]
-      if pd.isna(job) == False and job != None:
-        #print("Job:", job)
-        work_hours = time_string_to_float(work_time)
-        total_work_time+=work_hours
+    cat = empl_trio[employee][1]
+    sheet = empl_trio[employee][0]
+    if sheet != None:
+      #Read and clean the work times csv
+      time_df = pd.read_excel(time_file_path, sheet_name = sheet)
+      cols = time_df.loc[0]
+      time_df.columns = cols
+      time_df = time_df.drop([0]).reset_index(drop=True)
+      work_time_col =  time_df["Total Work Time"]
+      total_work_time = 0
+      job_hours = {}
+      j=0
       
-        if job not in job_hours:
-          job_hours[job] = []
-          job_hours[job].append(work_hours)
-        else:
-          job_hours[job].append(work_hours)
-      j+=1
-    #Calculate the percentage decicated to each job:
-    job_percentages = {}
-    for key in job_hours:
-      subtotal = sum(job_hours[key])
-      job_percentages[key] = subtotal/total_work_time
-    #Calculate the pay gotten from each job using the percentages:
-    job_pay = {}
-    for key in job_percentages:
-      subpay = total_pay * job_percentages[key]
-      job_pay[key] = subpay
-    #Update the correct dict with all the relevant info
+      #Calculate work hours for each employee:
+      while j < len(work_time_col):
+        work_time = work_time_col[j]
+        job = time_df.loc[j, "Job"]
+        if pd.isna(job) == False and job != None:
+          work_hours = time_string_to_float(work_time)
+          total_work_time+=work_hours
+
+          if job not in job_hours:
+            job_hours[job] = []
+            job_hours[job].append(work_hours)
+          else:
+            job_hours[job].append(work_hours)
+        j+=1
+      #Calculate the percentage decicated to each job:
+      job_percentages = {}
+      for key in job_hours:
+        subtotal = sum(job_hours[key])
+        job_percentages[key] = subtotal/total_work_time
+      #Calculate the pay gotten from each job using the percentages:
+      job_pay = {}
+      for key in job_percentages:
+        subpay = total_pay * job_percentages[key]
+        job_pay[key] = subpay
+    else:
+      job_pay = {}
+      job_pay[""] = total_pay
     if cat == "VTC":
       VTC = update_payroll_output(employee=employee, net_pay=net_pay, job_pay=job_pay, taxes=taxes, benefits=total_benefit, VT=VTC, pay_period=pay_period, total_pay=total_pay)
     elif cat == "VTE":

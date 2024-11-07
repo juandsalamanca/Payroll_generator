@@ -25,7 +25,7 @@ def preprocess_files(payroll, timelock):
         name_pairs[employee] = sheet
     if employee not in name_pairs:
       name_pairs[employee] = None
-  
+      
   empl_categories = {"Rowlee, Adam G.":"VTC", "Stinson, Spencer A.":"VTC", "Russell, Bryan T.":"VTC", "Fant, Ashley L.":"VTC", "Heim, Christian": "VTC", "Connor, Connor J.":"VTE", "Smith, Der":"VTC", "Fife, Devon N.":"VTC", "Moore, Elijah J.":"VTC", "Harvey, Elliott J.":"VTE", "Hegreness, Eric D.":"VTC", "Rice, Eric":"VTC", "Edwards, RJ L.":"VTC"}
   empl_trio = {}
   for key in name_pairs:

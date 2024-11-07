@@ -22,13 +22,16 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
     employee = employees[i]
     #Calculate toal pay and get net pay:
     net_pay = payroll.loc[i, "Net"]
+    #print("Earnings:")
     total_pay = calculate_total_pay_for_employee(payroll=payroll, idx=i, cols=pay_col_indexes)
     #Calculate money paid for taxes:
+    #print("Taxes")
     total_tax = calculate_total_pay_for_employee(payroll=payroll, idx=i, cols=tax_col_indexes)
     MED = payroll.loc[i, "MED Amount"]
     SS = payroll.loc[i, "SS Amount"]
     taxes = [total_tax, MED, SS]
     #Calculate money paid for benefits:
+    #print("Benefits:")
     total_benefit = calculate_total_pay_for_employee(payroll=payroll, idx=i, cols=benefit_col_indexes)
     cat = empl_trio[employee][1]
     sheet = empl_trio[employee][0]
@@ -48,7 +51,10 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
         work_time = work_time_col[j]
         job = time_df.loc[j, "Job"]
         if pd.isna(job) == False and job != None:
+          #print("Job:", job)
           work_hours = time_string_to_float(work_time)
+          #print("work time string:", work_time)
+          #print("work time float:", work_hours)
           total_work_time+=work_hours
 
           if job not in job_hours:
@@ -57,11 +63,14 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
           else:
             job_hours[job].append(work_hours)
         j+=1
+      #print("Total work:", total_work_time)
+      #print("Job hours dict:", job_hours)
       #Calculate the percentage decicated to each job:
       job_percentages = {}
       for key in job_hours:
         subtotal = sum(job_hours[key])
         job_percentages[key] = subtotal/total_work_time
+      #print("Job percentages:", job_percentages)
       #Calculate the pay gotten from each job using the percentages:
       job_pay = {}
       for key in job_percentages:
@@ -70,6 +79,7 @@ def produce_payroll_output(payroll, time_file_path, empl_trio, pay_period):
     else:
       job_pay = {}
       job_pay[""] = total_pay
+    #Update the correct dict with all the relevant info
     if cat == "VTC":
       VTC = update_payroll_output(employee=employee, net_pay=net_pay, job_pay=job_pay, taxes=taxes, benefits=total_benefit, VT=VTC, pay_period=pay_period, total_pay=total_pay)
     elif cat == "VTE":

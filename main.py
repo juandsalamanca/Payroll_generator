@@ -33,6 +33,24 @@ end_date_string = " ".join([str(e_year), str(e_month), str(e_day)])
 pay_period = [start_date_string, end_date_string]
 #-----------------------------------------------------------------------------------------
 
+new_payroll = None
+old = None
+option = st.selectbox("Do you want to add or delete an employee from the regular list?", ("Add", "Delete", "Both"))
+if option = "Add":
+  new_payroll = st.text_input("Write down the name of the new employee exactly as it will appear in the payroll file")
+  new_timelock = st.text_input("Write down the name of the new employee exactly as it will appear in the timelock file (name of the sheet for that employee)")
+  new_department = st.text_input("Write down the department of the new employee (VTE or VTC)")
+
+if option = "Delete":
+  old = st.text_input("Write down the name of the former employee exactly as it appeared in the payroll file")
+if option = "Both":
+  new_payroll = st.text_input("Write down the name of the new employee exactly as it will appear in the payroll file")
+  new_timelock = st.text_input("Write down the name of the new employee exactly as it will appear in the timelock file (name of the sheet for that employee)")
+  new_department = st.text_input("Write down the department of the new employee (VTE or VTC)")
+  old = st.text_input("Write down the name of the former employee exactly as it appeared in the payroll file")
+  
+#-----------------------------------------------------------------------------------------
+
 #UPLOAD FILES AND PRE-PROCESS THEM
 
 payroll_register = st.file_uploader("Upload the payroll register file")
@@ -42,11 +60,16 @@ timelock = st.file_uploader("Upload the timelock file")
 
 def process_data(payroll, timelock, pay_period):
   payroll, timelock, empl_trio = preprocess_files(payroll=payroll_register, timelock=timelock)
+  if old != None:
+    del empl_trio[old]
+  if new_payroll != None:
+    empl_trio[new_payroll] = [new_timelock, new_department]
   # Produce the output files:
   VTC, VTE = produce_payroll_output(payroll=payroll, time_file_path=timelock, empl_trio=empl_trio, pay_period=pay_period)
   VTC_excel = VTC.to_csv(index = False).encode("utf-8")
   VTE_excel = VTE.to_csv(index = False).encode("utf-8")
   return VTC_excel, VTE_excel
+  
 #-----------------------------------------------------------------------------------------
 if payroll_register and timelock:
 
